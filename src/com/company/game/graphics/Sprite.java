@@ -74,11 +74,10 @@ public class Sprite {
     }
 
     public void loadSpriteArray() {
-        spriteArray = new BufferedImage[wSprite][hSprite];
-
-        for (int x = 0; x < wSprite; x++) {
-            for (int y = 0; y < hSprite; y++) {
-                spriteArray[x][y] = getSprite(x, y);
+        spriteArray = new BufferedImage[hSprite][wSprite];
+        for (int y = 0; y < hSprite; y++) {
+            for (int x = 0; x < wSprite; x++) {
+                spriteArray[y][x] = getSprite(x, y);
             }
         }
     }
@@ -115,15 +114,12 @@ public class Sprite {
     public static void drawArray(Graphics2D g, Font f, String word, Vector2f pos, int width, int height,  int xOffset, int yOffset) {
         float x = pos.x;
         float y = pos.y;
-
         for (int i = 0; i < word.length(); i++) {
             if(word.charAt(i) != 32)
                 g.drawImage(f.getFont(word.charAt(i)), (int) x, (int) y, width, height, null);
+            x += xOffset;
+            y += yOffset;
         }
 
-        x += xOffset;
-        y += yOffset;
-
     }
-
 }

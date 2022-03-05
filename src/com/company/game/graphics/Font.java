@@ -88,12 +88,12 @@ public class Font {
     }
 
     public BufferedImage getFont(char letter) {
-        int value = letter;
+        int value = letter - 65;
 
         int x = value % wLetter;
-        int y = value / hLetter;
+        int y = value / wLetter;
 
-        return FONTSHEET.getSubimage(x, y, w, h);
+        return getLetter(x,y);
     }
 }
 
