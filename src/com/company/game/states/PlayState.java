@@ -3,6 +3,7 @@ package com.company.game.states;
 import com.company.game.entity.Player;
 import com.company.game.graphics.Font;
 import com.company.game.graphics.Sprite;
+import com.company.game.tiles.TileManager;
 import com.company.game.util.KeyHandler;
 import com.company.game.util.MouseHandler;
 import com.company.game.util.Vector2f;
@@ -12,9 +13,11 @@ import java.awt.*;
 public class PlayState extends GameState{
     private Font font;
     private Player player;
+    private TileManager tm;
 
     public PlayState(GameStateManager gsm){
         super(gsm);
+        tm = new TileManager("tile/Tile_Map_Useable.xml");
         font = new Font("font/fontsheet.png", 16, 16);
         player = new Player(new Sprite("entity/playerSheet.png"), new Vector2f(300,300),80);
     }
