@@ -6,6 +6,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -59,20 +60,29 @@ public class TileManager {
             for (int i = 0; i < layers; i++) {
                 node = list.item(i);
                 eElement = (Element) node;
-                if (i <= 0){
+                if (i <= 0) {
                     width = Integer.parseInt(eElement.getAttribute("width"));
                     height = Integer.parseInt(eElement.getAttribute("height"));
                 }
 
                 data[i] = eElement.getElementsByTagName("data").item(0).getTextContent();
-                System.out.println("----------------------------\n" + data[i]);
+                if (i >= 1) {
+                    tm.add(new TileMapNorm(data[i], sprite, width, height,blockwidth, blockHeight, tileColumns ));
+                } else {
+                    tm.add(newTileMapObj(data[i], sprite, width, height,blockwidth, blockHeight, tileColumns ));
+
+                }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("ERROR - TILEMANAGER: cannot read tilemap");
         }
 
     }
+
     public void render(Graphics2D g) {
+        for (int i = 0; i < tm.size(); i++) {
+            tm.get(i).render(g);
+        }
 
     }
 }
